@@ -1,0 +1,50 @@
+:root {
+    /* New Premium Color Palette */
+    --emerald-900: #064E3B;
+    --emerald-800: #065F46;
+    --emerald-700: #047857;
+    --emerald-600: #059669;
+    --emerald-500: #10B981;
+    --emerald-400: #34D399;
+    --gold-500: #D4AF37;
+    --gold-400: #E5C158;
+    --gold-300: #F0D77D;
+    --cream: #FFFDF7;
+    --cream-dark: #FDF6E3;
+    --charcoal: #1C1C1C;
+    --charcoal-light: #2D2D2D;
+    --slate: #64748B;
+    --white: #FFFFFF;
+
+    /* Theme */
+    --bg-primary: var(--cream);
+    --bg-secondary: var(--white);
+    --bg-accent: var(--cream-dark);
+    --text-primary: var(--charcoal);
+    --text-secondary: var(--slate);
+    --accent: var(--emerald-600);
+    --accent-light: var(--emerald-400);
+    --highlight: var(--gold-500);
+
+    --stat-number: #1f7a55;      /* dark emerald for light mode */
+    --stat-text: #0f3d2e;
+    --stat-shadow: rgba(0,0,0,0.15);
+    --stat-bg: rgba(255,255,255,0.65);
+}
+
+/* Dark theme overrides */
+.dark {
+    --bg-primary: var(--charcoal);
+    --bg-secondary: var(--charcoal-light);
+    --bg-accent: #252525;
+    --text-primary: var(--cream);
+    --text-secondary: #A1A1AA;
+    --accent: var(--emerald-400);
+    --accent-light: var(--emerald-300);
+
+    --stat-number: #f5c542;      /* gold pops on dark */
+    --stat-text: #e7f5ef;
+    --stat-shadow: rgba(0,0,0,0.45);
+    --stat-bg: rgba(0,0,0,0.35);
+
+}

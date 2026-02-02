@@ -1,0 +1,41 @@
+/* PRODUCT HERO (diabetic) */
+.product-hero { padding:8rem 0 4rem; position:relative; }
+.product-hero-grid { display:grid; grid-template-columns:1fr; gap:3rem; align-items:center; }
+@media (min-width:768px){ .product-hero-grid { grid-template-columns:1fr 1fr; } }
+
+.product-showcase { position:relative; display:flex; justify-content:center; align-items:center; }
+.product-showcase::before{ content:''; position:absolute; width:120%; height:120%; background: radial-gradient(circle, var(--accent) 0%, transparent 70%); opacity:0.1; filter: blur(60px); z-index:-1; }
+
+.product-hero-img { max-width:80%; height:auto; animation: float 4s ease-in-out infinite; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2)); }
+
+.product-details { display:flex; flex-direction:column; gap:1.5rem; }
+
+.breadcrumb { display:flex; gap:0.5rem; font-size:0.85rem; color:var(--text-secondary); }
+.breadcrumb a { color:var(--text-secondary); text-decoration:none; }
+.breadcrumb a:hover { color:var(--accent); }
+
+.product-title-lg { font-size: clamp(2rem,4vw,3rem); font-weight:700; line-height:1.2; }
+.highlight-text { color:var(--accent); }
+
+.product-price-lg { font-size:2rem; font-weight:700; color:var(--accent); font-family:'Inter',sans-serif; margin-top:1rem; }
+
+.order-btn { display:inline-flex; align-items:center; justify-content:center; gap:0.75rem; padding:1rem 2rem; background:#25D366; color:white; font-size:1.1rem; font-weight:600; border-radius:50px; text-decoration:none; transition: all .3s ease; box-shadow:0 4px 20px rgba(37,211,102,0.3); }
+.order-btn:hover { transform: translateY(-3px); box-shadow:0 8px 30px rgba(37,211,102,0.4); }
+
+/* INGREDIENTS GRID */
+.ingredients-section { padding:5rem 0; background: var(--bg-accent); }
+.grid-title { text-align:center; margin-bottom:3rem; font-size:2rem; font-weight:700; }
+.ingredients-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:1rem; }
+@media (min-width:640px){ .ingredients-grid { grid-template-columns: repeat(3,1fr); } }
+@media (min-width:1024px){ .ingredients-grid { grid-template-columns: repeat(5,1fr); } }
+
+.ingredient-card { background:var(--bg-secondary); padding:1.5rem; border-radius:16px; text-align:center; transition:all .3s ease; border:1px solid transparent; }
+.ingredient-card:hover { transform: translateY(-5px); border-color:var(--accent); box-shadow:0 10px 30px rgba(0,0,0,0.05); }
+
+/* FEATURES / BENEFITS */
+.features-section { padding:5rem 0; }
+.features-grid { display:grid; gap:1.5rem; grid-template-columns:1fr; }
+@media (min-width:768px){ .features-grid { grid-template-columns: repeat(3,1fr); } }
+
+.feature-box { padding:2rem; border-radius:20px; background:var(--bg-secondary); border:1px solid var(--bg-accent); display:flex; flex-direction:column; gap:1rem; }
+.feature-icon-lg { width:50px; height:50px; border-radius:12px; background:var(--bg-accent); color:var(--accent); display:flex; align-items:center; justify-content:center; }
