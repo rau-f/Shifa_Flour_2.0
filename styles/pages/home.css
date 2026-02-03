@@ -19,7 +19,7 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-image: url('../../assets/home/white.png');
+    background-image: url('../../assets/home/white.jpg');
     background-size: cover;
     background-position: center;
     animation: kenBurns 20s infinite alternate linear;
