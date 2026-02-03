@@ -34,6 +34,7 @@
 .hero-img {
     max-width: 85%;
     animation: float 5s ease-in-out infinite;
+    border-radius: 10px;
     filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15));
 }
 
