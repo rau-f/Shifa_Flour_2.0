@@ -1,50 +1,80 @@
 :root {
-    /* New Premium Color Palette */
+    /* Premium Premium Color Palette */
+    /* Emeralds */
     --emerald-900: #064E3B;
     --emerald-800: #065F46;
     --emerald-700: #047857;
     --emerald-600: #059669;
+    /* Primary Brand */
     --emerald-500: #10B981;
     --emerald-400: #34D399;
-    --gold-500: #D4AF37;
-    --gold-400: #E5C158;
-    --gold-300: #F0D77D;
-    --cream: #FFFDF7;
-    --cream-dark: #FDF6E3;
-    --charcoal: #1C1C1C;
-    --charcoal-light: #2D2D2D;
-    --slate: #64748B;
+
+    /* Golds */
+    --gold-600: #ca8a04;
+    --gold-500: #eab308;
+    /* Secondary Brand */
+    --gold-400: #facc15;
+    --gold-300: #fde047;
+
+    /* Neutrals */
+    --cream: #FAFAF9;
+    /* Warm white */
+    --cream-dark: #F5F5F4;
+    /* Slightly darker cream */
+    --charcoal: #111827;
+    /* Blue-ish black */
+    --charcoal-light: #1F2937;
+    --slate: #4B5563;
     --white: #FFFFFF;
 
-    /* Theme */
+    /* Semantic Colors */
+    --primary: var(--emerald-700);
+    --primary-light: var(--emerald-600);
+    --primary-dark: var(--emerald-900);
+
+    --secondary: var(--gold-500);
+    --secondary-hover: var(--gold-400);
+
+    /* Theme - Light Mode Default */
     --bg-primary: var(--cream);
     --bg-secondary: var(--white);
     --bg-accent: var(--cream-dark);
+
     --text-primary: var(--charcoal);
     --text-secondary: var(--slate);
-    --accent: var(--emerald-600);
-    --accent-light: var(--emerald-400);
-    --highlight: var(--gold-500);
+    --text-on-primary: var(--white);
 
-    --stat-number: #1f7a55;      /* dark emerald for light mode */
-    --stat-text: #0f3d2e;
-    --stat-shadow: rgba(0,0,0,0.15);
-    --stat-bg: rgba(255,255,255,0.65);
+    --accent: var(--primary-light);
+    --highlight: var(--secondary);
+
+    --stat-number: var(--primary-dark);
+    --stat-text: var(--text-primary);
+    --stat-shadow: rgba(4, 120, 87, 0.1);
+    --stat-bg: rgba(255, 255, 255, 0.8);
+
+    /* Fonts */
+    --font-primary: 'Outfit', sans-serif;
+    --font-secondary: 'Playfair Display', serif;
+    --font-urdu: 'Noto Nastaliq Urdu', serif;
 }
 
 /* Dark theme overrides */
 .dark {
-    --bg-primary: var(--charcoal);
-    --bg-secondary: var(--charcoal-light);
-    --bg-accent: #252525;
-    --text-primary: var(--cream);
-    --text-secondary: #A1A1AA;
+    --bg-primary: #0F172A;
+    /* Deep blue-black */
+    --bg-secondary: #1E293B;
+    --bg-accent: #020617;
+
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+
+    --primary: var(--emerald-500);
+    --primary-light: var(--emerald-400);
+
     --accent: var(--emerald-400);
-    --accent-light: var(--emerald-300);
 
-    --stat-number: #f5c542;      /* gold pops on dark */
-    --stat-text: #e7f5ef;
-    --stat-shadow: rgba(0,0,0,0.45);
-    --stat-bg: rgba(0,0,0,0.35);
-
+    --stat-number: var(--gold-400);
+    --stat-text: var(--text-primary);
+    --stat-shadow: rgba(0, 0, 0, 0.5);
+    --stat-bg: rgba(30, 41, 59, 0.8);
 }

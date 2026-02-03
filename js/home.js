@@ -27,19 +27,38 @@ if (bmiForm) {
     e.preventDefault();
 
     const weight = parseFloat(document.getElementById("weightInput").value);
-    const height = parseFloat(document.getElementById("heightInput").value) / 100;
+    const feet = parseFloat(document.getElementById("heightFeet").value);
+    const inches = parseFloat(document.getElementById("heightInches").value);
 
-    if (weight && height) {
-      const bmi = (weight / (height * height)).toFixed(1);
+    // Convert height to meters: ((feet * 12) + inches) * 0.0254
+    const heightInMeters = ((feet * 12) + inches) * 0.0254;
+
+    if (weight && heightInMeters > 0) {
+      const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
       bmiValue.textContent = bmi;
 
-      let category;
-      if (bmi < 18.5) category = "کم وزن";
-      else if (bmi < 25) category = "نارمل";
-      else if (bmi < 30) category = "زیادہ وزن";
-      else category = "موٹاپا";
+      let categoryUr = "";
+      let categoryEn = "";
+      
+      if (bmi < 18.5) {
+          categoryUr = "کم وزن";
+          categoryEn = "Underweight";
+      } else if (bmi < 25) {
+          categoryUr = "نارمل";
+          categoryEn = "Normal";
+      } else if (bmi < 30) {
+          categoryUr = "زیادہ وزن";
+          categoryEn = "Overweight";
+      } else {
+          categoryUr = "موٹاپا";
+          categoryEn = "Obese";
+      }
 
-      bmiCategory.textContent = category;
+      bmiCategory.setAttribute('data-ur', categoryUr);
+      bmiCategory.setAttribute('data-en', categoryEn);
+      
+      const currentLang = document.documentElement.lang || 'ur';
+      bmiCategory.textContent = currentLang === 'ur' ? categoryUr : categoryEn;
     }
   });
 }
@@ -56,59 +75,13 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 // Language Toggle - Wait for components to load
-function setupLanguageToggle() {
-  const langToggle = document.getElementById("langToggle");
-  if (!langToggle) return;
-
-  let currentLang = localStorage.getItem("lang") || "ur";
-
-  function updateLanguage(lang) {
-    currentLang = lang;
-    localStorage.setItem("lang", lang);
-    langToggle.textContent = lang === "ur" ? "EN" : "UR";
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === "ur" ? "rtl" : "ltr";
-
-    // Special font handling for English mode
-    if (lang === "en") {
-      document.body.classList.add("font-english-mode");
-    } else {
-      document.body.classList.remove("font-english-mode");
+// Listen for language changes to update BMI calculator if present
+document.addEventListener('languageChanged', (e) => {
+    const lang = e.detail.language;
+    const bmiCategory = document.getElementById("bmiCategory");
+    
+    if (bmiCategory && bmiCategory.hasAttribute(`data-${lang}`)) {
+         const text = bmiCategory.getAttribute(`data-${lang}`);
+         bmiCategory.textContent = text;
     }
-
-    // Update all translatable elements
-    document.querySelectorAll("[data-ur]").forEach((el) => {
-      const text = el.getAttribute(`data-${lang}`);
-      if (text) {
-        if (el.children.length === 0) {
-          el.textContent = text;
-        } else {
-          for (let node of el.childNodes) {
-            if (node.nodeType === 3 && node.nodeValue.trim() !== "") {
-              node.nodeValue = " " + text;
-              break;
-            }
-          }
-        }
-      }
-    });
-  }
-
-  langToggle.addEventListener("click", () => {
-    updateLanguage(currentLang === "ur" ? "en" : "ur");
-  });
-
-  // Initialize Language
-  updateLanguage(currentLang);
-}
-
-// Wait for components to load before setting up language toggle
-document.addEventListener('componentsLoaded', () => {
-  setupLanguageToggle();
-  revealOnScroll(); // Run reveal once components are loaded
 });
-
-// Also try to set up language toggle immediately if components are already loaded
-if (document.readyState === 'complete') {
-  setupLanguageToggle();
-}

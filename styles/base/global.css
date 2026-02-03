@@ -10,12 +10,26 @@ html {
 }
 
 body {
-    font-family: 'Noto Nastaliq Urdu', 'Inter', sans-serif;
+    font-family: var(--font-urdu), var(--font-primary);
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.7;
     overflow-x: hidden;
     transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* English Mode Typography */
+body.font-english-mode {
+    font-family: var(--font-primary);
+}
+
+body.font-english-mode h1,
+body.font-english-mode h2,
+body.font-english-mode h3,
+body.font-english-mode h4,
+body.font-english-mode .hero-title,
+body.font-english-mode .section-title {
+    font-family: var(--font-secondary);
 }
 
 /* Utility Classes */
@@ -26,7 +40,7 @@ body {
 }
 
 .font-english {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-primary);
 }
 
 /* Reveal utility used by multiple pages */

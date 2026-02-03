@@ -63,7 +63,7 @@ function loadComponent(url, container) {
                         <div class="nav-inner glass">
                             <a href="index.html" class="nav-logo">
                                 <img src="assets/logo/logo1.png" alt="Shifa">
-                                <span>شفا فوڈز</span>
+                                <span data-ur="شفا فوڈز" data-en="Shifa Foods">شفا فوڈز</span>
                             </a>
                         </div>
                     </nav>
@@ -79,7 +79,11 @@ function setupCommonFunctionality() {
     setupThemeToggle();
     
     // Mobile menu - setup for all pages
+    // Mobile menu - setup for all pages
     setupMobileMenu();
+    
+    // Language toggle - setup for all pages
+    setupLanguageToggle();
 }
 
 // Theme toggle setup
@@ -138,4 +142,99 @@ function setupMobileMenu() {
 }
 
 // Start loading components when DOM is ready
-document.addEventListener('DOMContentLoaded', loadAllComponents);
+// Start loading components when DOM is ready
+// Helper for safe storage access
+function getStorage(key, defaultValue) {
+    try {
+        return sessionStorage.getItem(key) || defaultValue;
+    } catch (e) {
+        console.warn("SessionStorage access denied or failed", e);
+        return window._tempStorage ? window._tempStorage[key] : defaultValue;
+    }
+}
+
+function setStorage(key, value) {
+    try {
+        sessionStorage.setItem(key, value);
+    } catch (e) {
+        console.warn("SessionStorage write failed", e);
+        if (!window._tempStorage) window._tempStorage = {};
+        window._tempStorage[key] = value;
+    }
+}
+
+// Start loading components when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    loadAllComponents();
+    // Initialize language immediately if possible to reduce flash
+    const savedLang = getStorage("lang", "ur");
+    if (document.documentElement.lang !== savedLang) {
+        document.documentElement.lang = savedLang;
+        document.documentElement.dir = savedLang === "ur" ? "rtl" : "ltr";
+        if (savedLang === "en") document.body.classList.add("font-english-mode");
+    }
+});
+
+// Language Toggle Setup
+function setupLanguageToggle() {
+    // We use event delegation because the navbar is loaded dynamically
+    // and sometimes the event listener might not attach correctly if timing is off.
+    document.addEventListener("click", (e) => {
+        const toggleBtn = e.target.closest("#langToggle");
+        if (toggleBtn) {
+            const currentLang = getStorage("lang", "ur");
+            const newLang = currentLang === "ur" ? "en" : "ur";
+            updateLanguage(newLang);
+        }
+    });
+
+    let currentLang = getStorage("lang", "ur");
+
+    function updateLanguage(lang) {
+        setStorage("lang", lang);
+        
+        // Always look up the button fresh to ensure we have the current DOM element
+        const langToggle = document.getElementById("langToggle");
+        if (langToggle) {
+            langToggle.textContent = lang === "ur" ? "EN" : "UR";
+        }
+        
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === "ur" ? "rtl" : "ltr";
+
+        // Special font handling for English mode
+        if (lang === "en") {
+            document.body.classList.add("font-english-mode");
+        } else {
+            document.body.classList.remove("font-english-mode");
+        }
+
+        // Update all translatable elements
+        document.querySelectorAll("[data-ur]").forEach((el) => {
+            const text = el.getAttribute(`data-${lang}`);
+            if (text) {
+                if (el.tagName === 'TITLE') {
+                    document.title = text;
+                } else if (el.children.length === 0) {
+                    el.textContent = text;
+                } else {
+                    // Start checking from the first child node
+                    let updated = false;
+                    for (let node of el.childNodes) {
+                        if (node.nodeType === 3 && node.nodeValue.trim() !== "") {
+                            node.nodeValue = " " + text + " ";
+                            updated = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Dispatch language changed event
+        document.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: lang } }));
+    }
+
+    // Initialize Language
+    updateLanguage(currentLang);
+}
