@@ -139,9 +139,10 @@
 /* HERO STATS */
 .hero-stats {
     display: flex;
+    width: 100%;
     gap: 2rem;
     margin-top: 4rem;
-    padding-top: 2rem;
+    padding: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     justify-content: center;
     animation: fadeInUp 0.8s ease-out 0.4s backwards;
@@ -155,25 +156,27 @@
     font-size: 1.8rem;
     font-weight: 700;
     font-family: 'Inter', sans-serif;
-    color: var(--stat-value, #6b4e00);
-    text-shadow: 0 1px 2px var(--stat-shadow-light, rgba(0,0,0,0.06));
+    color: var(--gold-600);
+    color: #ca8a04;
+    text-shadow: 0 1px 2px var(--stat-shadow-light, rgba(0, 0, 0, 0.1));
 }
 
 .dark .stat-value {
     color: var(--stat-value, #e6db74);
-    text-shadow: 0 1px 3px var(--stat-shadow-dark, rgba(0,0,0,0.3));
+    text-shadow: 0 1px 3px var(--stat-shadow-dark, rgba(0, 0, 0, 0.3));
 }
 
 .stat-label {
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--stat-label, rgba(0,0,0,0.7));
-    text-shadow: 0 1px 1px rgba(255,255,255,0.25); /* tiny contrast boost on noisy images */
+    color: var(--stat-label, rgba(0, 0, 0, 0.7));
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.25);
+    /* tiny contrast boost on noisy images */
 }
 
 .dark .stat-label {
     color: var(--stat-label, rgba(233, 224, 224, 0.9));
-    text-shadow: 0 1px 1px rgba(0,0,0,0.25);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 /* FEATURES BENTO */
@@ -240,6 +243,15 @@
     padding: 5rem 0;
     background: var(--bg-accent);
 }
+
+/* .product-badge {
+    background: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+} */
 
 .products-grid {
     display: grid;
